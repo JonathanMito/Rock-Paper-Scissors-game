@@ -1,0 +1,681 @@
+@font-face {
+	font-family: Barlow Semi Condensed Semi Bold;
+	src: url(fontes/BarlowSemiCondensed-SemiBold.ttf);
+}
+
+@font-face {
+	font-family: Barlow Semi Condensed Bold;
+	src: url(fontes/BarlowSemiCondensed-Bold.ttf);
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body{
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+html{
+	background-image: radial-gradient(circle at 50% 0%, hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+}
+
+/* fundo regras */
+div#bg-active{
+	z-index: 1;
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.4);
+}
+
+/* cabeçalho */
+
+header{
+	width: 966px;
+	height: 188px;
+	border: 2px solid hsl(217, 16%, 45%);
+	margin: 56px auto;
+	border-radius: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 23px 45px 23px 32px;
+}
+
+header div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 206px;
+	height: 140px;
+	background-color: #fff;
+	border-radius: 12px;
+}
+
+header div label#textScore{
+	font-size: 13pt;
+	color: hsl(229, 64%, 46%);
+	font-family: "Barlow Semi Condensed Semi Bold";
+	letter-spacing: 4px;
+}
+
+header div label#numberScore{
+	font-size: 55pt;
+	color: hsl(229, 25%, 31%);
+	font-family: "Barlow Semi Condensed Bold";
+	line-height: 50pt;
+}
+
+/* mãos clicáveis */
+
+section#handsOptions{
+	position: relative;
+	width: 350px;
+	height: 330px;
+	margin: 188px auto 0;
+	background-image: url("images/bg-pentagon.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+section div.hand{
+	position: absolute;
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
+	border-bottom: 5px solid;
+	cursor: pointer;
+}
+
+section div.rockBG, section div.lizardBG{
+	bottom: calc(-160px / 2);
+}
+
+section div.paperBG, section div.spockBG{
+	top: 35%;
+	transform: translateY(-50%);
+}
+
+section div.paperBG{
+	background-image: linear-gradient(to bottom, hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+	border-bottom-color: #2945c3;
+	right: calc(-160px/2);
+}
+
+section div.scissorBG{
+	background-image: linear-gradient(to bottom, hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+	border-bottom-color: #c76c1b;
+	top: calc(-160px/2);
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+section div.rockBG{
+	background-image: linear-gradient(to bottom, hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+	border-bottom-color: #a01637;
+	right: 0%;
+}
+
+section div.lizardBG{
+	background-image: linear-gradient(to bottom, hsl(261, 73%, 60%), hsl(261, 72%, 63%));
+	border-bottom-color: #5f37aa;
+	left: 0%;
+}
+
+section div.spockBG{
+	background-image: linear-gradient(to bottom, hsl(189, 59%, 53%), hsl(189, 58%, 57%));
+	border-bottom-color: #2c8fae;
+	left: calc(-160px / 2);
+}
+
+section div.hand div{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 130px;
+	height: 130px;
+	background-color: #fff;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 5px solid #b9bfd5;
+}
+
+section div.hand div img{
+	width: 50%;
+}
+
+/* mãos selecionadas */
+
+section#handsSelected{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	display: none;
+	position: relative;
+}
+
+section#handsSelected div#hand1, section#handsSelected div#hand2{
+	position: relative;
+}
+
+section#handsSelected div.winner::before{
+	content: "";
+	position: absolute;
+	width: calc(352px * 2.3);
+	height: calc(352px * 2.3);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	border-radius: 50%;
+	background-image: radial-gradient(circle, rgba(255,255,255,.06) 0%, rgba(255,255,255,.06) 43%, rgba(255,255,255,.04) 43%, rgba(255,255,255,.04) 56% , rgba(255,255,255,.02) 56%);
+	z-index: -1;
+}
+
+section#handsSelected div.hand{
+	position: relative;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	transform: translate(0,0);
+	cursor: default;
+}
+
+section#handsSelected div.hand, section#handsSelected div.pre-show{
+	width: 352px;
+	height: 352px;
+}
+
+section#handsSelected div.pre-show{
+	background-image: radial-gradient(circle at center, rgba(0,0,0,.2) 0%, rgba(0,0,0,.2) 50%,  rgba(0,0,0,0) 50%);
+  	background-size: 120% 120%;
+  	background-position: center;
+  	background-repeat: no-repeat;
+}
+
+section#handsSelected div.hand div{
+	width: 262px;
+	height: 262px;
+}
+
+section#handsSelected div.boxHandSelected, section div#result{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+section#handsSelected div#bhsleft{
+	margin-left: 94px;
+}
+
+section#handsSelected div#bhsright{
+	margin-right: 94px;
+}
+
+section#handsSelected label#textPicked{
+	color: #fff;
+	font-size: 22pt;
+	margin-bottom: 83px;
+}
+
+section#handsSelected label#textPicked, section div#result label#textResult, section div#result button#playAgain{
+	letter-spacing: 2px;
+	font-family: "Barlow Semi Condensed Semi Bold";
+}
+
+/*Resultado ganhou perdeu*/
+
+section div#result{
+	justify-content: center;
+}
+
+section div#result label#textResult{
+	font-size: 47pt;
+	color: #fff;
+	margin-bottom: 32px;
+}
+
+section div#result button#playAgain{
+	font-size: 13pt;
+	color: hsl(229, 25%, 31%);
+	border: none;
+	cursor: pointer;
+	height: 59px;
+	width: 304px;
+}
+
+section div#result button#playAgain{
+	display: none;
+	border-radius: 5px;
+}
+
+/* Regras */
+
+section#rules{
+	width: 551px;
+	height: 507px;
+	background-color: #fff;
+	top: 50%;
+	z-index: 2;
+	display: none;
+	border-radius: 12px;
+}
+
+section#rules, section#rules img#rulesBG{
+	position: absolute;
+	transform: translate(-50%, -50%);
+	left: 50%;
+	
+}
+
+section#rules img#rulesBG{
+	position: absolute;
+	top: 60%;
+}
+
+section#rules div#headerRules{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 46px 41px;
+}
+
+section#rules div#headerRules label#textRules{
+	color: hsl(229, 25%, 31%);
+	font-family: "Barlow Semi Condensed Bold";
+	font-size: 27pt;
+}
+
+section#rules div#headerRules img#closeRules{
+	cursor: pointer;
+}
+
+/* footer (botão regras) */
+
+footer {
+	position: absolute;
+	bottom: 43px;
+	right: 43px;
+}
+
+footer div#boxRules{
+	width: 179px;
+	height: 53px;
+	border-radius: 12px;
+	border: 2px solid #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #fff;
+	font-size: 15pt;
+	font-family: "Barlow Semi Condensed Semi Bold";
+	letter-spacing: 2px;
+}
+
+@media screen and (max-width: 1366px){
+	header{
+		/*width: 702px;*/
+		height: 154px;
+		margin: 47px auto;
+	}
+
+	header div {
+	    width: 150px;
+	    height: 114px;
+	}
+
+	header div label#numberScore {
+	    font-size: 50pt;
+	    line-height: 41pt;
+	}
+
+	header div label#textScore {
+	    font-size: 11pt;
+	    letter-spacing: 2px;
+	}
+
+	section#handsSelected div.hand, section#handsSelected div.pre-show {
+	    width: 288px;
+	    height: 288px;
+	}
+
+	section#handsSelected div.hand div{
+	    width: 214px;
+	    height: 214px;
+	}
+
+	section#handsSelected label#textPicked {
+	    margin-bottom: 68px;
+	}
+
+	section#handsSelected div#bhsright {
+	    margin-right: 68px;
+	}
+
+	section#handsSelected div#bhsleft {
+	    margin-left: 68px;
+	}
+
+	section#rules {
+	    width: 400px;
+	    height: 415px;
+	}
+
+	section#rules img#rulesBG{
+		width: 300px;
+	}
+
+	section div#result button#playAgain {
+	    height: 48px;
+	    width: 281px;
+	}
+
+	footer div#boxRules {
+	    width: 130px;
+	    height: 43px;
+	}
+}
+
+@media screen and (max-width: 1044px){
+
+	header{
+		width: 702px;
+	}
+
+	section#handsSelected div.hand, section#handsSelected div.pre-show{
+	    width: 220px;
+	    height: 220px;
+	}
+
+	section#handsSelected div.hand div{
+	    width: 163px;
+	    height: 163px;
+	}
+
+	section#handsSelected div.winner::before {
+	    width: calc(352px * 2.0);
+	    height: calc(352px * 2.0);
+	}
+}
+
+@media screen and (max-width: 908px){
+
+	section#handsSelected div#bhsright {
+	    margin-right: 20px;
+	}
+
+	section#handsSelected div#bhsleft {
+	    margin-left: 20px;
+	}
+
+	section#handsSelected label#textPicked {
+	    font-size: 18pt;
+	}
+
+	section div#result label#textResult {
+	    font-size: 40pt;
+	}
+
+	section div#result button#playAgain {
+	    width: 241px;
+	}
+}
+
+@media screen and (max-width: 727px){
+
+	header {
+	    width: 500px;
+	    height: 120px;
+	}
+
+	header div {
+	    width: 130px;
+	    height: 90px;
+	}
+
+	header div label#numberScore {
+	    font-size: 47pt;
+	}
+
+	section#handsSelected {
+	    justify-content: space-around;
+	}
+
+	section#handsSelected div.winner::before {
+	    width: calc(352px * 1.7);
+	    height: calc(352px * 1.7);
+	}
+
+	section div#result {
+	    position: absolute;
+	    bottom: -185px;
+	}
+
+}
+
+
+@media screen and (max-width: 513px){
+
+	header {
+	    width: 400px;
+	}
+
+	section#handsOptions {
+	    position: relative;
+	    width: 250px;
+	    height: 240px;
+	}
+
+	section div.hand{
+		width: 100px;
+		height: 100px;
+	}
+
+	section div.hand div{
+		width: 70px;
+		height: 70px;
+	}
+
+	section div.rockBG, section div.lizardBG{
+		bottom: calc(-100px / 2);
+	}
+
+	section div.paperBG, section div.spockBG{
+		top: 35%;
+		transform: translateY(-50%);
+	}
+
+	section div.paperBG{
+		
+		right: calc(-100px/2);
+	}
+
+	section div.scissorBG{
+		top: calc(-100px/2);
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	section div.spockBG{
+		left: calc(-100px / 2);
+	}
+
+	section#handsSelected div.hand, section#handsSelected div.pre-show{
+	    width: 180px;
+	    height: 180px;
+	}
+
+	section#handsSelected div.hand div {
+	    width: 130px;
+	    height: 130px;
+	}
+
+	section#handsSelected div.winner::before {
+	    width: calc(352px * 1.5);
+	    height: calc(352px * 1.5);
+	}
+
+}
+
+@media screen and (max-width: 457px){
+
+	section#handsOptions{
+	    margin: 100px auto;
+	}
+
+	section#handsSelected div.hand, section#handsSelected div.pre-show{
+		width: 140px;
+		height: 140px;
+	}
+
+	section#handsSelected div.hand div {
+	    width: 100px;
+	    height: 100px;
+	}
+
+	section#handsSelected label#textPicked {
+	    font-size: 13pt;
+	}
+}
+
+@media screen and (max-width: 413px){
+	header {
+	    width: 300px;
+	    padding: 23px 14px 23px 7px;
+	}
+	header img{
+		width: 120px;
+	}
+	header div{
+		width: 100px;
+    	height: 80px;
+    	border-radius: 5px;
+	}
+
+	header div label#textScore {
+	    font-size: 10pt;
+	    letter-spacing: 2px;
+	}
+
+	header div label#numberScore {
+	    font-size: 35pt;
+	    line-height: 30pt;
+	}
+
+	section#rules {
+	    width: 300px;
+	    height: 500px;
+	    top: 50%;
+	}
+
+	section#rules, section#rules img#rulesBG{
+		top: 50%;
+		transform: translate(-50%,-50%);
+	}
+
+	section#rules img#rulesBG {
+	    transform: translate(-50%, -50%) scale(.9);
+	}
+
+	section#rules div#headerRules {
+	    justify-content: center;
+	}
+
+	section#rules div#headerRules img#closeRules {
+	    position: absolute;
+	    bottom: 50px;
+	}
+}
+
+/* dispositivio de tamanho 375px */
+
+@media screen and (max-width: 375px){
+
+	header{
+		width: 300px;
+		height: 100px;
+		border-radius: 10px;
+		margin: 20px auto;
+		padding-left: 22px;
+		padding-right: 12px;
+	}
+
+	/* mãos clicáveis */
+
+	section#handsOptions{
+		width: 230px;
+	    height: 220px;
+	    margin: 100px auto;
+	    background-position: center;
+	    background-size: 90%;
+	}
+
+	section#handsSelected div#bhsright,  section#handsSelected div#bhsleft{
+	    margin-right: 0;
+	    margin-left: 0;
+	}
+
+	section#handsSelected label#textPicked {
+	    margin-bottom: 0;
+	    font-size: 11pt;
+	}
+
+	section#handsSelected div.boxHandSelected {
+		flex-direction: column-reverse;
+	}
+
+	section#handsSelected label#textPicked {
+	    margin-top: 20px;
+	}
+
+	section#handsSelected div.winner::before {
+	    width: calc(140px * 1.7);
+	    height: calc(140px * 1.7);
+	}
+
+	section div#result {
+	    bottom: -170px;
+	}
+
+	section div#result label#textResult{
+		margin-bottom: 15px;
+	}
+
+	section div#result button#playAgain {
+	    height: 49px;
+	    width: 254px;
+	}
+
+	footer {
+		right: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	footer div#boxRules{
+		width: auto;
+	}
+}
+
+@media screen and (max-width: 320px){
+	section#handsOptions {
+	    width: 211px;
+	    height: 220px;
+	    margin: 72px auto;
+	}
+}
+

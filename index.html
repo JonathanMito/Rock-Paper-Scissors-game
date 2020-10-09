@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+
+  <!-- Score
+  Rules
+
+  You Picked
+  The House Picked
+
+  You Win
+  You Lose
+
+  Play Again -->
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 100%; font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <div id="bg-active"></div>
+
+  <header>
+    <img src="images/logo.svg">
+    <div>
+      <label id="textScore">SCORE</label>
+      <label id="numberScore"></label>
+    </div>
+  </header>
+
+  <!-- opções -->
+
+  <section id="handsOptions">
+
+    <div class="hand scissorBG" onclick="handOnPress('scissor')">
+        <div>
+          <img src="images/icon-scissors.svg" class="imgCenter">
+        </div>
+      </div>
+
+      <div class="hand paperBG" onclick="handOnPress('paper')">
+        <div>
+          <img src="images/icon-paper.svg" class="imgCenter">
+        </div>
+      </div>
+
+      <div class="hand rockBG" onclick="handOnPress('rock')">
+        <div>
+          <img src="images/icon-rock.svg" class="imgCenter">
+        </div>
+      </div>
+
+      <div class="hand lizardBG" onclick="handOnPress('lizard')">
+        <div>
+          <img src="images/icon-lizard.svg" class="imgCenter">
+        </div>
+      </div>
+
+      <div class="hand spockBG" onclick="handOnPress('spock')">
+        <div>
+          <img src="images/icon-spock.svg" class="imgCenter">
+        </div>
+      </div>
+
+  </section>
+
+  <!-- selecionadas -->
+
+  <section id="handsSelected">
+
+      <div class="boxHandSelected" id="bhsright">
+        <label id="textPicked">YOU PICKED</label>
+        <div id="hand1">
+
+        </div>
+      </div>
+
+      <div id="result">
+        <label id="textResult"></label>
+        <button id="playAgain" onclick="resetGame();">PLAY AGAIN</button>
+      </div>
+      
+      <div class="boxHandSelected" id="bhsleft">
+        <label id="textPicked">THE HOUSE PICKED</label>
+        <div id="hand2">
+
+        </div>
+      </div>
+
+  </section>
+
+  <section id="rules">
+    <img src="images/image-rules-bonus.svg" id="rulesBG">
+    <div id="headerRules">
+      <label id="textRules">RULES</label>
+      <img id="closeRules" src="images/icon-close.svg" onclick="displayBoxRules(false);">
+    </div>
+  </section>
+
+  <footer>
+    <div id="boxRules" onclick="displayBoxRules(true);">
+      RULES
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="script.js"></script>
+
+  <script type="text/javascript" src="rules.js"></script>
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://www.frontendmentor.io/profile/JonathanMito">Jonathan Carvalho</a>.
+  </div>
+</body>
+</html>
